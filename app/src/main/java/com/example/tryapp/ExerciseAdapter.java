@@ -1,5 +1,6 @@
 package com.example.tryapp;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +30,30 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     @Override
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         Exercise exercise = exerciseList.get(position);
+
+
         holder.nameTextView.setText(exercise.getName());
-        holder.descriptionTextView.setText(exercise.getDescription());
+        holder.descriptionTextView.setText(exercise.getBodyPart());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an Intent to launch the new activity
+                Intent intent = new Intent(view.getContext(), ExerciseDetailsActivity.class);
+
+                // Pass the exercise details as extras in the Intent
+                intent.putExtra("bodyPart", exercise.getBodyPart());
+                intent.putExtra("equipment", exercise.getEquipment());
+                intent.putExtra("gifUrl", exercise.getGifUrl());
+                intent.putExtra("id", exercise.getId());
+                intent.putExtra("name", exercise.getName());
+                intent.putExtra("target", exercise.getTarget());
+
+                // Start the new activity
+                view.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override

@@ -82,11 +82,16 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < exerciseArray.length(); i++) {
                                 JSONObject exerciseObject = exerciseArray.getJSONObject(i);
 
-                                String name = exerciseObject.getString("bodyPart");
-                                String description = exerciseObject.getString("target");
+                                String bodyPart = exerciseObject.getString("bodyPart");
+                                String equipment = exerciseObject.getString("equipment");
+                                String gifUrl = exerciseObject.getString("gifUrl");
+                                String id = exerciseObject.getString("id");
+                                String name = exerciseObject.getString("name");
+                                String target = exerciseObject.getString("target");
+
                                 // Parse other exercise data fields
 
-                                Exercise exercise = new Exercise(name, description);
+                                Exercise exercise = new Exercise(bodyPart,equipment,gifUrl,id,name,target);
                                 exerciseList.add(exercise);
 //                                Log.d("exerciseList0", String.valueOf(exerciseList));
 //                                Log.d("exerciseList1", String.valueOf(exercise));
@@ -97,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                                 public void run() {
                                     exerciseAdapter.notifyDataSetChanged();
 
+
+//                                    Intent intent=new Intent(getApplicationContext(),MainActivity2.class);
+//                                    startActivity(intent);
 
                                 }
                             });
